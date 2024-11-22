@@ -334,6 +334,89 @@ paths:
           description: A course
           schema:
             $ref: '#/definitions/schema.Course'
+  /course/{id}/sections:
+    get:
+      description: '"Returns the all of the sections of the course with given ID"'
+      operationId: courseSectionById
+      parameters:
+      - description: ID of the course to get
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: A list of sections
+          schema:
+            items:
+              $ref: '#/definitions/schema.Section'
+            type: array
+  /course/sections:
+    get:
+      description: '"Returns all the sections of all the courses matching the query''s
+        string-typed key-value pairs"'
+      operationId: courseSectionSearch
+      parameters:
+      - description: The course's official number
+        in: query
+        name: course_number
+        type: string
+      - description: The course's subject prefix
+        in: query
+        name: subject_prefix
+        type: string
+      - description: The course's title
+        in: query
+        name: title
+        type: string
+      - description: The course's description
+        in: query
+        name: description
+        type: string
+      - description: The course's school
+        in: query
+        name: school
+        type: string
+      - description: The number of credit hours awarded by successful completion of
+          the course
+        in: query
+        name: credit_hours
+        type: string
+      - description: The level of education that this course course corresponds to
+        in: query
+        name: class_level
+        type: string
+      - description: The type of class this course corresponds to
+        in: query
+        name: activity_type
+        type: string
+      - description: The grading status of this course
+        in: query
+        name: grading
+        type: string
+      - description: The internal (university) number used to reference this course
+        in: query
+        name: internal_course_number
+        type: string
+      - description: The weekly contact hours in lecture for a course
+        in: query
+        name: lecture_contact_hours
+        type: string
+      - description: The frequency of offering a course
+        in: query
+        name: offering_frequency
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: A list of sections
+          schema:
+            items:
+              $ref: '#/definitions/schema.Section'
+            type: array
   /grades/overall:
     get:
       description: '"Returns the overall grade distribution"'
@@ -517,6 +600,240 @@ paths:
           description: A professor
           schema:
             $ref: '#/definitions/schema.Professor'
+  /professor/{id}/courses:
+    get:
+      description: '"Returns all the courses taught by the professor with given ID"'
+      operationId: professorCourseById
+      parameters:
+      - description: ID of the professor to get
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: A list of courses
+          schema:
+            items:
+              $ref: '#/definitions/schema.Course'
+            type: array
+  /professor/{id}/sections:
+    get:
+      description: '"Returns all the sections taught by the professor with given ID"'
+      operationId: professorSectionById
+      parameters:
+      - description: ID of the professor to get
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: A list of sections
+          schema:
+            items:
+              $ref: '#/definitions/schema.Section'
+            type: array
+  /professor/courses:
+    get:
+      description: '"Returns all of the courses of all the professors matching the
+        query''s string-typed key-value pairs"'
+      operationId: professorCourseSearch
+      parameters:
+      - description: The professor's first name
+        in: query
+        name: first_name
+        type: string
+      - description: The professor's last name
+        in: query
+        name: last_name
+        type: string
+      - description: One of the professor's title
+        in: query
+        name: titles
+        type: string
+      - description: The professor's email address
+        in: query
+        name: email
+        type: string
+      - description: The professor's phone number
+        in: query
+        name: phone_number
+        type: string
+      - description: The building of the location of the professor's office
+        in: query
+        name: office.building
+        type: string
+      - description: The room of the location of the professor's office
+        in: query
+        name: office.room
+        type: string
+      - description: A hyperlink to the UTD room locator of the professor's office
+        in: query
+        name: office.map_uri
+        type: string
+      - description: A hyperlink pointing to the professor's official university profile
+        in: query
+        name: profile_uri
+        type: string
+      - description: A link to the image used for the professor on the professor's
+          official university profile
+        in: query
+        name: image_uri
+        type: string
+      - description: The start date of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.start_date
+        type: string
+      - description: The end date of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.end_date
+        type: string
+      - description: One of the days that one of the office hours meetings of the
+          professor
+        in: query
+        name: office_hours.meeting_days
+        type: string
+      - description: The time one of the office hours meetings of the professor starts
+        in: query
+        name: office_hours.start_time
+        type: string
+      - description: The time one of the office hours meetings of the professor ends
+        in: query
+        name: office_hours.end_time
+        type: string
+      - description: The modality of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.modality
+        type: string
+      - description: The building of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.location.building
+        type: string
+      - description: The room of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.location.room
+        type: string
+      - description: A hyperlink to the UTD room locator of one of the office hours
+          meetings of the professor
+        in: query
+        name: office_hours.location.map_uri
+        type: string
+      - description: The _id of one of the sections the professor teaches
+        in: query
+        name: sections
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: A list of Courses
+          schema:
+            items:
+              $ref: '#/definitions/schema.Course'
+            type: array
+  /professor/sections:
+    get:
+      description: '"Returns all of the sections of all the professors matching the
+        query''s string-typed key-value pairs"'
+      operationId: professorSectionSearch
+      parameters:
+      - description: The professor's first name
+        in: query
+        name: first_name
+        type: string
+      - description: The professor's last name
+        in: query
+        name: last_name
+        type: string
+      - description: One of the professor's title
+        in: query
+        name: titles
+        type: string
+      - description: The professor's email address
+        in: query
+        name: email
+        type: string
+      - description: The professor's phone number
+        in: query
+        name: phone_number
+        type: string
+      - description: The building of the location of the professor's office
+        in: query
+        name: office.building
+        type: string
+      - description: The room of the location of the professor's office
+        in: query
+        name: office.room
+        type: string
+      - description: A hyperlink to the UTD room locator of the professor's office
+        in: query
+        name: office.map_uri
+        type: string
+      - description: A hyperlink pointing to the professor's official university profile
+        in: query
+        name: profile_uri
+        type: string
+      - description: A link to the image used for the professor on the professor's
+          official university profile
+        in: query
+        name: image_uri
+        type: string
+      - description: The start date of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.start_date
+        type: string
+      - description: The end date of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.end_date
+        type: string
+      - description: One of the days that one of the office hours meetings of the
+          professor
+        in: query
+        name: office_hours.meeting_days
+        type: string
+      - description: The time one of the office hours meetings of the professor starts
+        in: query
+        name: office_hours.start_time
+        type: string
+      - description: The time one of the office hours meetings of the professor ends
+        in: query
+        name: office_hours.end_time
+        type: string
+      - description: The modality of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.modality
+        type: string
+      - description: The building of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.location.building
+        type: string
+      - description: The room of one of the office hours meetings of the professor
+        in: query
+        name: office_hours.location.room
+        type: string
+      - description: A hyperlink to the UTD room locator of one of the office hours
+          meetings of the professor
+        in: query
+        name: office_hours.location.map_uri
+        type: string
+      - description: The _id of one of the sections the professor teaches
+        in: query
+        name: sections
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: A list of Sections
+          schema:
+            items:
+              $ref: '#/definitions/schema.Section'
+            type: array
   /section:
     get:
       description: '"Returns all courses matching the query''s string-typed key-value
